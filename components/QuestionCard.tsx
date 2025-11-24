@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Question } from '../types';
-import { CheckCircle, XCircle, HelpCircle, Info } from 'lucide-react';
+import { CheckCircle, XCircle, HelpCircle } from 'lucide-react';
 
 interface QuestionCardProps {
   question: Question;
@@ -51,10 +52,10 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
         </div>
       </div>
 
-      {/* Texto de la pregunta */}
-      <h3 className="text-lg md:text-xl font-semibold text-slate-800 mb-8 leading-relaxed">
+      {/* Texto de la pregunta con soporte para saltos de línea */}
+      <div className="text-lg md:text-xl font-medium text-slate-800 mb-8 leading-relaxed whitespace-pre-wrap">
         {question.text}
-      </h3>
+      </div>
 
       {/* Opciones */}
       <div className="space-y-4">
@@ -67,7 +68,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
             <div className="flex items-start gap-3 w-full">
               {/* Indicador de letra (A, B, C) */}
               <div className={`
-                w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold text-sm border transition-colors
+                w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold text-sm border transition-colors mt-0.5
                 ${showFeedback && option.id === question.correctAnswer ? 'bg-success text-white border-success' : ''}
                 ${showFeedback && selectedOptionId === option.id && option.id !== question.correctAnswer ? 'bg-error text-white border-error' : ''}
                 ${!showFeedback && selectedOptionId === option.id ? 'bg-primary text-white border-primary' : 'bg-white text-slate-500 border-slate-300'}
@@ -76,7 +77,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
               </div>
 
               {/* Texto de la opción */}
-              <div className="flex-grow pt-1">
+              <div className="flex-grow">
                 <p className={`text-base leading-snug ${showFeedback && option.id !== question.correctAnswer && selectedOptionId !== option.id ? 'text-slate-500' : 'text-slate-700'}`}>
                   {option.text}
                 </p>
@@ -94,12 +95,12 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
             {/* Retroalimentación específica por opción */}
             {showFeedback && option.feedback && (
               <div className={`
-                mt-3 ml-11 text-sm p-3 rounded-lg border-l-2 animate-in fade-in slide-in-from-top-2
+                mt-3 ml-11 text-sm p-3 rounded-lg border-l-4 animate-in fade-in slide-in-from-top-2
                 ${option.id === question.correctAnswer 
-                  ? 'bg-green-100/50 border-success text-green-800' 
-                  : 'bg-slate-100 border-slate-300 text-slate-600'}
+                  ? 'bg-green-50 border-success text-green-800' 
+                  : 'bg-slate-50 border-slate-300 text-slate-600'}
               `}>
-                <p><span className="font-bold">{option.id === question.correctAnswer ? 'Por qué es correcta:' : 'Análisis:'}</span> {option.feedback}</p>
+                <p><span className="font-bold block mb-1">{option.id === question.correctAnswer ? 'Por qué es correcta:' : 'Análisis:'}</span> {option.feedback}</p>
               </div>
             )}
           </div>
@@ -108,10 +109,10 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
 
       {/* Explicación General / Conclusión Pedagógica */}
       {showFeedback && question.explanation && (
-        <div className="mt-8 p-5 bg-blue-50 rounded-xl border border-blue-100 animate-fadeIn">
-          <div className="flex items-center gap-2 mb-3 text-primary font-bold">
+        <div className="mt-8 p-5 bg-blue-50 rounded-xl border border-blue-100 animate-in fade-in duration-500">
+          <div className="flex items-center gap-2 mb-2 text-primary font-bold">
             <HelpCircle className="w-5 h-5" />
-            <span>Conclusión Pedagógica</span>
+            <span className="uppercase tracking-wide text-xs">Conclusión Pedagógica</span>
           </div>
           <p className="text-slate-700 leading-relaxed text-sm md:text-base">
             {question.explanation}

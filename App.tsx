@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { questions } from './data';
 import { QuizState, QuizMode } from './types';
@@ -78,10 +79,10 @@ const App: React.FC = () => {
           currentQuestionIndex: nextIndex,
           showFeedback: false
         }));
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0); // Hard scroll to top for new block
       } else {
         setGameState('results');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
       }
 
     } else {
@@ -93,10 +94,10 @@ const App: React.FC = () => {
           currentQuestionIndex: nextIndex,
           showFeedback: false
         }));
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+        window.scrollTo(0, 0); // Hard scroll to top for new question
       } else {
         setGameState('results');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
       }
     }
   };
@@ -148,7 +149,7 @@ const App: React.FC = () => {
         <ProgressBar current={progressIndex} total={questions.length} />
 
         {/* Question List */}
-        <div className="space-y-6">
+        <div className="space-y-8">
           {currentQuestionsBlock.map((question) => (
             <QuestionCard
               key={question.id}
