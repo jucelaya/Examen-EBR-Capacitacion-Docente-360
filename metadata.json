@@ -1,0 +1,5 @@
+{
+  "name": "Simulador Examen EBR Primaria",
+  "description": "Aplicación interactiva para la preparación de docentes de primaria, basada en el examen A04-EBRP-11. Incluye modos de práctica, explicaciones detalladas y análisis de resultados.",
+  "requestFramePermissions": []
+}
